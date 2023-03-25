@@ -4,6 +4,7 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float force;
     [SerializeField] private GameState _gameState;
+    [SerializeField] private GameObject _pausePanel;
 
     private Rigidbody _rigidbody;
 
@@ -14,7 +15,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && !_gameState.IsStop && !_gameState.IsOver)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !_gameState.IsStop &&
+            !_gameState.IsOver && !_pausePanel.activeSelf)
         {
             if (_rigidbody.isKinematic)
             {

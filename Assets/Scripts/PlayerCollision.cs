@@ -16,6 +16,7 @@ public class PlayerCollision : MonoBehaviour
         {
             _rigidbody.isKinematic = true;
             _gameState.SetOver();
+            Destroy(gameObject);
         }
 
         if (other.gameObject.TryGetComponent(out Score score))
