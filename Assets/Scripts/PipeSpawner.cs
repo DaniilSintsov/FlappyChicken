@@ -10,7 +10,7 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] private GameState _gameState;
     [SerializeField] private int _maxAmountOfPipesOnScene = 6;
 
-    private Queue<GameObject> _obstaclesPull = new Queue<GameObject>();
+    private Queue<GameObject> _obstaclesPool = new Queue<GameObject>();
 
     private void Start()
     {
@@ -25,9 +25,12 @@ public class PipeSpawner : MonoBehaviour
             if (_gameState.IsStart && !_gameState.IsStop && !_gameState.IsOver)
             {
                 float randomYPos = Random.Range(-1f, 1f);
-                GameObject newObstacle = Instantiate(_obstacles, new Vector3(5, randomYPos, 0), Quaternion.identity);
+                float distanceBetweenObstacles = 5f;
+                GameObject newObstacle = Instantiate(_obstacles,
+                    new Vector3(distanceBetweenObstacles, randomYPos, 0),
+                    Quaternion.identity);
                 newObstacle.GetComponent<ObstaclesMove>().SetGameState(_gameState);
-                _obstaclesPull.Enqueue(newObstacle);
+                _obstaclesPool.Enqueue(newObstacle);
             }
 
             yield return new WaitForSeconds(1);
@@ -39,10 +42,9 @@ public class PipeSpawner : MonoBehaviour
         while (true)
         {
             if (_gameState.IsStart && !_gameState.IsStop && !_gameState.IsOver &&
-                _obstaclesPull.Count > _maxAmountOfPipesOnScene)
+                _obstaclesPool.Count > _maxAmountOfPipesOnScene)
             {
-                GameObject toDestroy = _obstaclesPull.Dequeue();
-                Destroy(toDestroy);
+                Destroy(_obstaclesPool.Dequeue());
             }
 
             yield return new WaitForSeconds(1);
