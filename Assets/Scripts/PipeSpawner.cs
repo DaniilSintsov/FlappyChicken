@@ -34,7 +34,7 @@ public class PipeSpawner : MonoBehaviour
                     float lastObstaclePosX = _obstaclesPool[^1].transform.position.x;
                     newObstaclePosX = lastObstaclePosX + distanceBetweenObstacles;
 
-                    if (lastObstaclePosX <= 4f)
+                    if (lastObstaclePosX <= firstObstaclePosX - 1f)
                     {
                         CreateNewObstacle(out newObstacle, newObstaclePosX, randomYPos);
                     }
