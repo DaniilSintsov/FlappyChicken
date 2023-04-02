@@ -8,7 +8,7 @@ public class ObstaclesMove : MonoBehaviour
 
     private void Update()
     {
-        if (_gameState && _gameState.IsStart && !_gameState.IsStop && !_gameState.IsOver)
+        if (_gameState && _gameState.IsGameActive())
         {
             transform.Translate(-speed * Time.deltaTime, 0, 0);
         }

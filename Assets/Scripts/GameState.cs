@@ -26,6 +26,11 @@ public class GameState : MonoBehaviour
 
     public void SetStart()
     {
+        if (_player.gameObject.GetComponent<Rigidbody>().isKinematic)
+        {
+            _player.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+
         IsStart = true;
     }
 
@@ -58,5 +63,10 @@ public class GameState : MonoBehaviour
     {
         Score++;
         _scoreText.text = $"Счет: {Score}";
+    }
+
+    public bool IsGameActive()
+    {
+        return IsStart && !IsStop && !IsOver;
     }
 }

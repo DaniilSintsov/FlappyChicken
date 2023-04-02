@@ -3168,6 +3168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 3
   _gameState: {fileID: 2126938982}
+  _mainMenu: {fileID: 776555334}
 --- !u!114 &1646169307
 MonoBehaviour:
   m_ObjectHideFlags: 0
